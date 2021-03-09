@@ -1,0 +1,1 @@
+const ch6 = require('./js/oop/ch6_advanced_object_creation/index.js');
