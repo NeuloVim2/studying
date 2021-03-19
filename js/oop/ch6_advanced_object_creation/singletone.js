@@ -68,3 +68,136 @@ let gl = new mySingeltone2();
 
 console.log(`Invoke gl.newId()\n`);
 console.log(`Expected result should be 3, and actual: ${gl.newId()}\n`);
+
+// System: Ukraine(as state)
+// Singletones: President of Ukraine, Cabinet of Ministers, Parlament
+// Why: To create one point of access for client and another API. For example we want to create law but if
+//      every object would have possibility to do this, it will destroy the system, that why we create singletone
+
+const State = ( () => {
+    let president = null,
+        cabinetOfMinisters = null,
+        parlament = null,
+        anotherPresident = null,
+        anotherCabinetOfMinisters = null,
+        anotherParlament = null;
+
+    return class {
+
+        constructor(){
+            president = new President();
+            anotherPresident = new President();
+            cabinetOfMinisters = new CabinetOfMinister();
+            anotherCabinetOfMinisters = new CabinetOfMinister();
+            parlament = new Parlament();
+            anotherParlament = new Parlament();
+        }
+
+        init(){
+            console.log(`== president ==`)
+            president.makeOrder('order1');
+            console.log(`number of orders created are ${president.getOrderNum} \n`);
+            president.makeOrder('order2');
+            console.log(`number of orders created are ${president.getOrderNum} \n`);
+
+            console.log(`== cabOfMin ==`)
+            cabinetOfMinisters.makeAct('act1');
+            console.log(`number of acts created are ${cabinetOfMinisters.getActNum} \n`);
+            cabinetOfMinisters.makeAct('act2');
+            console.log(`number of acts created are ${cabinetOfMinisters.getActNum} \n`);
+
+            console.log(`== parlament ==`)
+            parlament.createLaw('law1');
+            console.log(`number of laws created are ${parlament.getLawNum} \n`);
+            parlament.createLaw('law2');
+            console.log(`number of laws created are ${parlament.getLawNum} \n`);
+
+            console.log(`== try to use create and another instance of President, Parlament, CabinetOfMinister ==`)
+            anotherPresident.makeOrder('order3');
+            console.log(`number of orders created are ${president.getOrderNum} \n`);
+            anotherCabinetOfMinisters.makeAct('act3');
+            console.log(`number of acts created are ${anotherCabinetOfMinisters.getActNum} \n`);
+            anotherParlament.createLaw('law3');
+            console.log(`number of laws created are ${anotherParlament.getLawNum} \n`);
+
+        }
+
+    }
+})();
+
+// Singletones
+const President = ( () => {
+
+    // private members
+    let instanse = null;
+    let orderNum = 0;
+
+    return class {
+         constructor () {
+            if(!instanse) {
+                instanse = this
+            }
+            return instanse;
+        };
+        makeOrder(name) {
+            console.log(`make order ${name}\n`);
+            orderNum++;
+        }
+        get getOrderNum() {
+            return orderNum;
+        }
+    }
+
+
+})()
+const CabinetOfMinister = ( () => {
+
+    // private members
+    let instanse = null;
+    let actNum = 0;
+
+    return class {
+        constructor () {
+            if(!instanse) {
+                instanse = this
+            }
+            return instanse;
+        };
+        makeAct(name) {
+            console.log(`make order ${name}\n`);
+            actNum++;
+        }
+        get getActNum() {
+            return actNum;
+        }
+    }
+
+
+})()
+const Parlament = ( () => {
+
+    // private members
+    let instanse = null;
+    let lawNum = 0;
+
+    return class {
+        constructor () {
+            if(!instanse) {
+                instanse = this
+            }
+            return instanse;
+        };
+        createLaw(name) {
+            console.log(`make order ${name}\n`);
+            lawNum++;
+        }
+        get getLawNum() {
+            return lawNum;
+        }
+    }
+
+
+})()
+
+const ukraine = new State();
+ukraine.init();
