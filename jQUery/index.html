@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    The main idea of jQuery is <strong>simplification</strong>
+    Cause of that jQuery's statement look like "$(selector).action()". hence the typical sequence of action are:
+
+        Search for specific element $() then Do action with it or to it;
+    
+    "$( string )" is a function that inspect DOM for a element and return it as DOM object. The parameter that function takes, must be like css selector.
+    That mean you use typical selector search syntax of the CSS. From example
+        $("#elements-id"), $(".elements-class-name"), $("body"), $("p:hover"), $("li:nth-child") etc...
+    
+    With jQuery you can chain several calls in one statement: element.do1().do2()
+
+    All jQuery code must begen from such statement:
+        
+        $(document).ready( function(){
+            .... // any jQuery code
+        });
+    
+    It checks if document is created. 
+    If you would will write jQuery without such checking, it colud be inserted into document before any is created. 
+    As a result it wont work.
+
+    To change element's css do:
+      $(".element").css("propery","value");
+
+    To add class to the element do:
+
+        element.addClass("class-name");
+    
+    To remove class from the element do:
+
+        element.removeClass("class-name");
+
+    To find element's position on the screen use:
+      $("element").offset() - return an object with value of left, top properties
+
+      or
+
+      $("element").position() - return an object with value of left, top properties( what the difference between offset() and position()?)
+
+    To attach event listener to the element do:
+
+        element.on("typeOfEvent", function() {...});
+        
+        or 
+
+        element.[click || hover || onChange || etc...]( function {...} ) where [click || hover || onChange || etc...] - generic events
+
+    To ditach event listener from the element do:
+
+        element.removeEvent(target);
+    
+    To clone the element do:
+        
+        element.clone();
+
+    To get parent of the element do:
+
+        element.parent();
+    
+    To get children of the element do:
+
+        element.children();
+    <script src="./libs/jQuery3.5.1.js"></script>
+    <script src="./index.js"></script>
+</body>
+</html>

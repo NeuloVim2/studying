@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript general</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    
+    Prototipe for methods inharitace
+    Object for properties
+
+    If there is need to inherit parent's method by children, add method to parent's prototype.
+    For example:
+        <pre>
+            function Animal( legs, sound ) {
+                this.legs = legs;
+                this.sound = sound;
+            }
+
+            let Animal = {
+                sound: function(){
+                    console.log("make sound!");
+                }
+            }
+        </pre> 
+
+    <script src="./index.js"></script>
+</body>
+</html>
